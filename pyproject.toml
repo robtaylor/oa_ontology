@@ -49,8 +49,8 @@ Issues = "https://github.com/username/oa-ontology/issues"
 [tool.oa-ontology]
 html_repo = "https://github.com/oa22doc/oa22doc.github.io"
 modules = ["design", "base", "tech", "cms", "wafer", "block"]
-default_directories = {
-    "html_dir" = "html_source",
-    "yaml_dir" = "yaml_output", 
-    "ontology_dir" = "ontology_output"
-}
+
+[tool.oa-ontology.default_directories]
+html_dir = "html_source"
+yaml_dir = "yaml_output"
+ontology_dir = "ontology_output"
