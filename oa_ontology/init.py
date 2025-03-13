@@ -69,11 +69,23 @@ def clone_documentation_repo(html_repo, html_dir):
     """Clone the OpenAccess HTML documentation repository."""
     if os.path.exists(html_dir):
         print(f"The directory '{html_dir}' already exists.")
-        choice = input("Do you want to remove it and clone again? (y/n): ")
-        if choice.lower() == 'y':
-            subprocess.run(["rm", "-rf", html_dir], check=True)
+        # Default to using the existing directory in non-interactive mode
+        is_interactive = os.isatty(sys.stdin.fileno())
+        
+        if is_interactive:
+            try:
+                choice = input("Do you want to remove it and clone again? (y/n): ")
+                if choice.lower() == 'y':
+                    subprocess.run(["rm", "-rf", html_dir], check=True)
+                else:
+                    print(f"Using existing '{html_dir}' directory")
+                    return
+            except (EOFError, KeyboardInterrupt):
+                # Handle non-interactive mode or interrupt
+                print(f"Using existing '{html_dir}' directory (non-interactive mode)")
+                return
         else:
-            print(f"Using existing '{html_dir}' directory")
+            print(f"Using existing '{html_dir}' directory (non-interactive mode)")
             return
     
     print(f"Cloning documentation from {html_repo}...")
