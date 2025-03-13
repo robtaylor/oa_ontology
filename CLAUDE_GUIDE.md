@@ -1,24 +1,62 @@
-# Using Claude Code to Refine the OpenAccess Ontology
+## PDM
 
-This guide provides instructions on how to use Claude Code to further refine and enhance the OpenAccess ontology. Claude's capabilities in understanding complex technical domains and generating code make it an excellent tool for ontology development.
+This project uses PDM (Python Development Master) for dependency management. Here's how to work with PDM:
 
-## Getting Started with Claude Code
+### Setting Up PDM for the First Time
 
-1. Launch Claude Code in your terminal:
+1. Install PDM if you haven't already:
    ```bash
-   claude
+   curl -sSL https://pdm-project.org/install-pdm.py | python3 -
    ```
 
-2. Navigate to your oa-ontology project directory:
+2. Initialize the environment (when in the project directory):
    ```bash
-   cd path/to/oa-ontology
+   pdm install
    ```
 
-3. Help Claude understand the project structure:
-   ```bash
-   ls -la
-   cat README.md
-   ```
+### Common PDM Commands
+
+- **Add a dependency**:
+  ```bash
+  pdm add package_name
+  ```
+
+- **Add a development dependency**:
+  ```bash
+  pdm add -d package_name
+  ```
+
+- **Update dependencies**:
+  ```bash
+  pdm update
+  ```
+
+- **Run a script defined in pyproject.toml**:
+  ```bash
+  pdm run script_name
+  ```
+
+- **Run within the managed enviroment **:
+  ```bash
+  pdm run script-or-program
+  ```
+
+- **Run python within the managed enviroment **:
+  ```bash
+  pdm run python
+  ```
+
+- **Activate the virtual environment**:
+  ```bash
+  eval $(pdm venv activate)
+  ```
+
+- **Create a new virtual environment**:
+  ```bash
+  pdm venv create
+  ```
+
+PDM automatically creates and manages virtual environments, making Python version and dependency management seamless.
 
 ## Effective Prompting Strategies
 

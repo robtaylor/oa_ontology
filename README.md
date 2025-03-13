@@ -65,13 +65,7 @@ The analysis revealed several interesting aspects of the OpenAccess API:
 
 ### Requirements
 
-- Python 3.6+
-- Required packages: networkx, pyyaml, tqdm
-
-Install dependencies:
-```
-pip install networkx pyyaml tqdm
-```
+Python >= 3.8, [PDM](https://pdm-project.org/en/latest/)
 
 ### Setup and Running the Scripts
 
@@ -80,8 +74,6 @@ First, install the project with PDM:
 ```bash
 pdm install
 ```
-
-Then, run the scripts using PDM:
 
 1. Setup the environment and download documentation:
 ```bash
@@ -121,16 +113,6 @@ You can also process all steps at once with:
 ```bash
 pdm run oa-run-all
 ```
-
-### Quick Installation and Run
-
-For convenience, you can use the included helper script:
-
-```bash
-./install_and_run.sh
-```
-
-This will install dependencies with PDM and run the entire process.
 
 ### Visualizing with External Tools
 
