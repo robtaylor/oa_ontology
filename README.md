@@ -65,7 +65,7 @@ The analysis revealed several interesting aspects of the OpenAccess API:
 
 ### Requirements
 
-Python >= 3.8, [PDM](https://pdm-project.org/en/latest/)
+Python >= 3.9, [PDM](https://pdm-project.org/en/latest/)
 
 ### Setup and Running the Scripts
 
