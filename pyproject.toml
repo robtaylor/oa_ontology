@@ -9,10 +9,11 @@ readme = "README.md"
 requires-python = ">=3.8"
 license = {text = "MIT"}
 dependencies = [
-    "networkx>=2.8.0",
+    "networkx>=2.8.0,<3.2",
     "pyyaml>=6.0",
     "tqdm>=4.64.0", 
-    "beautifulsoup4>=4.11.0"
+    "beautifulsoup4>=4.11.0",
+    "tomli>=2.0.0; python_version < '3.11'"
 ]
 
 [build-system]
@@ -30,7 +31,7 @@ dev = [
 ]
 
 [project.scripts]
-oa-setup = "oa_ontology.setup:main"
+oa-setup = "oa_ontology.init:main"
 oa-parse = "oa_ontology.parse_html:main"
 oa-build = "oa_ontology.build_ontology:main"
 oa-domain = "oa_ontology.extract_domain_ontology:main"
@@ -43,3 +44,13 @@ Homepage = "https://github.com/username/oa-ontology"
 Documentation = "https://github.com/username/oa-ontology#readme"
 Repository = "https://github.com/username/oa-ontology.git"
 Issues = "https://github.com/username/oa-ontology/issues"
+
+# Configuration for the ontology explorer
+[tool.oa-ontology]
+html_repo = "https://github.com/oa22doc/oa22doc.github.io"
+modules = ["design", "base", "tech", "cms", "wafer", "block"]
+default_directories = {
+    "html_dir" = "html_source",
+    "yaml_dir" = "yaml_output", 
+    "ontology_dir" = "ontology_output"
+}

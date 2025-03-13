@@ -10,23 +10,19 @@ echo "========================================================"
 # Check for PDM
 if command -v pdm &> /dev/null; then
     echo "✓ PDM found"
-    INSTALL_CMD="pdm install"
-    RUN_CMD="pdm run oa-run-all"
-elif command -v pip &> /dev/null; then
-    echo "✓ pip found (PDM not found)"
-    INSTALL_CMD="pip install -e ."
-    RUN_CMD="oa-run-all"
 else
-    echo "✗ Neither PDM nor pip found. Please install PDM or pip first."
+    echo "✗ PDM not found. Please install PDM first:"
+    echo "  pip install pdm"
+    echo "  or visit https://pdm-project.org/en/latest/usage/installation.html"
     exit 1
 fi
 
 # Install dependencies
 echo -e "\nInstalling dependencies..."
-$INSTALL_CMD
+pdm install
 
 # Run the application
 echo -e "\nRunning OpenAccess Ontology Explorer..."
-$RUN_CMD
+pdm run oa-run-all
 
 echo -e "\nDone!"

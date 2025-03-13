@@ -75,9 +75,17 @@ pip install networkx pyyaml tqdm
 
 ### Setup and Running the Scripts
 
-1. Setup the environment and download documentation:
+First, install the project with PDM:
+
+```bash
+pdm install
 ```
-python setup.py
+
+Then, run the scripts using PDM:
+
+1. Setup the environment and download documentation:
+```bash
+pdm run oa-setup
 ```
 This will:
 - Clone the OpenAccess HTML documentation from GitHub
@@ -85,34 +93,44 @@ This will:
 - Create a configuration file
 
 2. Parse the HTML documentation into YAML:
-```
-python parse_html.py
+```bash
+pdm run oa-parse
 ```
 
 3. Extract the software ontology:
-```
-python build_ontology.py
+```bash
+pdm run oa-build
 ```
 
 4. Generate reports and visualizations:
-```
-python visualize_ontology.py
+```bash
+pdm run oa-visualize
 ```
 
 5. Export to Neo4j:
-```
-python export_to_neo4j.py
+```bash
+pdm run oa-export
 ```
 
 6. Extract the domain ontology:
-```
-python extract_domain_ontology.py
+```bash
+pdm run oa-domain
 ```
 
 You can also process all steps at once with:
+```bash
+pdm run oa-run-all
 ```
-python setup.py && python parse_html.py && python build_ontology.py && python extract_domain_ontology.py
+
+### Quick Installation and Run
+
+For convenience, you can use the included helper script:
+
+```bash
+./install_and_run.sh
 ```
+
+This will install dependencies with PDM and run the entire process.
 
 ### Visualizing with External Tools
 
