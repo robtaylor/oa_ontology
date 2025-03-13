@@ -15,9 +15,14 @@ from tqdm import tqdm
 
 # Avoid importing matplotlib for now as we don't directly need it here
 
+# Load configuration
+import json
+with open('config.json', 'r') as f:
+    CONFIG = json.load(f)
+
 # Constants
-YAML_DIR = Path("output_test/design")
-OUTPUT_DIR = Path("ontology_output")
+YAML_DIR = Path(CONFIG["yaml_dir"]) / "design"  # Default to design module
+OUTPUT_DIR = Path(CONFIG["ontology_dir"])
 
 def extract_relationships_from_method(method, class_name):
     """Extract relationships from a single method definition."""

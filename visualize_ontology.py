@@ -12,9 +12,14 @@ from tqdm import tqdm
 
 # Skip matplotlib and numpy imports since we're not generating visualizations
 
+# Load configuration
+import json
+with open('config.json', 'r') as f:
+    CONFIG = json.load(f)
+
 # Constants
-ONTOLOGY_FILE = Path("ontology_output/design_ontology.json")
-OUTPUT_DIR = Path("ontology_output/visualizations")
+ONTOLOGY_FILE = Path(CONFIG["ontology_dir"]) / "design_ontology.json"
+OUTPUT_DIR = Path(CONFIG["ontology_dir"]) / "visualizations"
 MAX_NODES = 50  # Limit for better visualization
 
 def load_graph_from_json(file_path):

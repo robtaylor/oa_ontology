@@ -73,26 +73,45 @@ Install dependencies:
 pip install networkx pyyaml tqdm
 ```
 
-### Running the Scripts
+### Setup and Running the Scripts
 
-To extract the software ontology:
+1. Setup the environment and download documentation:
+```
+python setup.py
+```
+This will:
+- Clone the OpenAccess HTML documentation from GitHub
+- Set up the directory structure
+- Create a configuration file
+
+2. Parse the HTML documentation into YAML:
+```
+python parse_html.py
+```
+
+3. Extract the software ontology:
 ```
 python build_ontology.py
 ```
 
-To generate reports and visualizations:
+4. Generate reports and visualizations:
 ```
 python visualize_ontology.py
 ```
 
-To export to Neo4j:
+5. Export to Neo4j:
 ```
 python export_to_neo4j.py
 ```
 
-To extract the domain ontology:
+6. Extract the domain ontology:
 ```
 python extract_domain_ontology.py
+```
+
+You can also process all steps at once with:
+```
+python setup.py && python parse_html.py && python build_ontology.py && python extract_domain_ontology.py
 ```
 
 ### Visualizing with External Tools

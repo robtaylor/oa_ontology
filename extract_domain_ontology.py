@@ -14,9 +14,14 @@ from pathlib import Path
 from tqdm import tqdm
 import networkx as nx
 
+# Load configuration
+import json
+with open('config.json', 'r') as f:
+    CONFIG = json.load(f)
+
 # Constants
-YAML_DIR = Path("output_test/design")
-OUTPUT_DIR = Path("ontology_output")
+YAML_DIR = Path(CONFIG["yaml_dir"]) / "design"  # Default to design module
+OUTPUT_DIR = Path(CONFIG["ontology_dir"])
 DOMAIN_FILE = os.path.join(OUTPUT_DIR, "domain_ontology.json")
 DOMAIN_GRAPHML = os.path.join(OUTPUT_DIR, "domain_ontology.graphml")
 DOMAIN_REPORT = os.path.join(OUTPUT_DIR, "domain_ontology_report.md")

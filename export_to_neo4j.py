@@ -9,9 +9,14 @@ import json
 from pathlib import Path
 import re
 
+# Load configuration
+import json
+with open('config.json', 'r') as f:
+    CONFIG = json.load(f)
+
 # Constants
-ONTOLOGY_FILE = Path("ontology_output/design_ontology.json")
-OUTPUT_DIR = Path("ontology_output")
+ONTOLOGY_FILE = Path(CONFIG["ontology_dir"]) / "design_ontology.json"
+OUTPUT_DIR = Path(CONFIG["ontology_dir"])
 
 def clean_property_value(value):
     """Clean property values for Cypher queries."""
