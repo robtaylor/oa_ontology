@@ -48,3 +48,8 @@ Thumbs.db
 # Project specific
 *.log
 temp/
+.pdm-python
+config.json
+html_source/
+ontology_output/
+yaml_output/
