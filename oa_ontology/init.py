@@ -100,17 +100,19 @@ def create_config_file(config):
     print("Creating configuration file: config.json")
     
     # Add HTML directories to config
-    html_dir = config["default_directories"]["html_dir"]
+    html_dir = config.get("default_directories", {}).get("html_dir", "html_source")
     module_dirs = {}
     
-    for module in config["modules"]:
+    for module in config.get("modules", ["design"]):
         module_path = os.path.join(html_dir, module)
         if os.path.exists(module_path) and os.path.isdir(module_path):
             module_dirs[module] = module_path
     
     runtime_config = {
-        **config["default_directories"],
-        "modules": config["modules"],
+        "html_dir": html_dir,
+        "yaml_dir": config.get("default_directories", {}).get("yaml_dir", "yaml_output"),
+        "ontology_dir": config.get("default_directories", {}).get("ontology_dir", "ontology_output"),
+        "modules": config.get("modules", ["design"]),
         "module_dirs": module_dirs
     }
     
