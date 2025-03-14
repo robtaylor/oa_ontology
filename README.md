@@ -104,7 +104,7 @@ pdm install
 
 1. Setup the environment and download documentation:
 ```bash
-pdm run oa-setup
+pdm run setup
 ```
 This will:
 - Clone the OpenAccess HTML documentation from GitHub
@@ -113,81 +113,86 @@ This will:
 
 2. Parse the HTML documentation into YAML:
 ```bash
-pdm run oa-parse
+pdm run parse
 ```
 
 3. Extract the software ontology:
 ```bash
-pdm run oa-build
+pdm run build
 ```
 
 4. Generate reports and visualizations:
 ```bash
-pdm run oa-visualize
+pdm run visualize
 ```
 
 5. Export to Neo4j:
 ```bash
-pdm run oa-export
+pdm run export
 ```
 
 6. Extract the domain ontology:
 ```bash
-pdm run oa-domain
+pdm run domain
 ```
 
 You can also process all steps at once with:
 ```bash
-pdm run oa-run-all
+pdm run run-all
+```
+
+You can list all available scripts with:
+```bash
+pdm run --list
 ```
 
 7. Parse UML diagrams using computer vision:
 ```bash
-pdm run oa-parse-uml
+pdm run parse-uml
 ```
 
 8. Parse HTML image maps for UML information:
 ```bash
-pdm run oa-parse-imagemap
+pdm run parse-imagemap
 ```
 
 9. Extract documentation from HTML:
 ```bash
-pdm run oa-doc-extract
+pdm run doc-extract
 ```
 
 10. Cross-reference UML diagrams and API documentation:
 ```bash
-pdm run oa-crossref
+pdm run crossref
 ```
 
 11. Validate the cross-referenced data:
 ```bash
-pdm run oa-validate-crossref
+pdm run validate-crossref
 ```
 
 12. Generate enhanced domain ontology from cross-referenced data:
 ```bash
-pdm run oa-enhanced-domain
+pdm run enhanced-domain
 ```
 
 13. Fix and enhance the ontology for visualization:
 ```bash
-pdm run oa-fix-enhanced
+pdm run fix-enhanced
 ```
 
 14. Create visualizations of the ontology:
 ```bash
 # Most connected classes without inheritance
-pdm run oa-vis-connected --limit 75
+pdm run vis-connected --limit 75
 
 # Domain-specific visualizations
-pdm run oa-vis-enhanced --domain Physical
+pdm run vis-enhanced --domain Physical
 ```
 
-For a comprehensive list of all available commands and their options, see the scripts README:
+For a comprehensive list of all available commands and their options, see the scripts README or run:
 ```bash
-cat scripts/README.md
+pdm run --list
 ```
 
 ### Visualizing with External Tools
