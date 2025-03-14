@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Domain Ontology Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            width: 90%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            background-color: #f1f1f1;
+            border: 1px solid #ddd;
+            border-bottom: none;
+            border-radius: 5px 5px 0 0;
+            margin-right: 5px;
+        }
+        .tab.active {
+            background-color: white;
+            border-bottom: 2px solid white;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        iframe {
+            width: 100%;
+            height: 700px;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+        }
+        .stats {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+        .domain-stats {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .domain-card {
+            flex-basis: 30%;
+            background-color: white;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+        }
+        .domain-card h3 {
+            margin-top: 0;
+            color: #333;
+        }
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: white;
+            border-radius: 5px;
+        }
+        .legend-item {
+            margin-right: 20px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Enhanced Domain Ontology Dashboard</h1>
+        <p>Interactive visualization of the OpenAccess Design API domain ontology</p>
+    </header>
+    
+    <div class="container">
+        <div class="tabs">
+            <div class="tab active" onclick="openTab(event, 'overview')">Overview</div>
+            <div class="tab" onclick="openTab(event, 'physical')">Physical Domain</div>
+            <div class="tab" onclick="openTab(event, 'connectivity')">Connectivity Domain</div>
+            <div class="tab" onclick="openTab(event, 'hierarchy')">Hierarchy Domain</div>
+        </div>
+        
+        <div id="overview" class="tab-content active">
+            <h2>Enhanced Domain Ontology Overview</h2>
+            <p>This visualization shows the relationships between classes in the OpenAccess API, colored by domain.</p>
+            <iframe src="enhanced_domain_visualization.html"></iframe>
+            
+            <div class="stats">
+                <h2>Ontology Statistics</h2>
+                <p>The enhanced domain ontology contains 1,475 classes and 15,781 relationships derived from both API documentation and UML diagrams.</p>
+                
+                <div class="domain-stats">
+                    <div class="domain-card">
+                        <h3>Physical Domain</h3>
+                        <p>280 classes</p>
+                        <p>Main concepts: Block, Fig, Shape, Via, Pin</p>
+                    </div>
+                    <div class="domain-card">
+                        <h3>Connectivity Domain</h3>
+                        <p>189 classes</p>
+                        <p>Main concepts: Net, Term, InstTerm, Pin</p>
+                    </div>
+                    <div class="domain-card">
+                        <h3>Hierarchy Domain</h3>
+                        <p>86 classes</p>
+                        <p>Main concepts: Design, Block, Module, Instance</p>
+                    </div>
+                    <div class="domain-card">
+                        <h3>Layout Domain</h3>
+                        <p>43 classes</p>
+                        <p>Main concepts: Row, Site, Track, Boundary</p>
+                    </div>
+                    <div class="domain-card">
+                        <h3>Device Domain</h3>
+                        <p>25 classes</p>
+                        <p>Main concepts: Device, Resistor, Capacitor</p>
+                    </div>
+                    <div class="domain-card">
+                        <h3>Other</h3>
+                        <p>852 classes</p>
+                        <p>Various utility and support classes</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="legend">
+                <h3>Domain Color Legend</h3>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #1f77b4;"></div>
+                    <span>Connectivity</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #ff7f0e;"></div>
+                    <span>Physical</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #2ca02c;"></div>
+                    <span>Hierarchy</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #d62728;"></div>
+                    <span>Layout</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #9467bd;"></div>
+                    <span>Device</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #8c564b;"></div>
+                    <span>Other</span>
+                </div>
+            </div>
+        </div>
+        
+        <div id="physical" class="tab-content">
+            <h2>Physical Domain</h2>
+            <p>The Physical domain contains classes related to physical design objects like Blocks, Shapes, Figures, and Pins.</p>
+            <iframe src="physical_domain_visualization.html"></iframe>
+        </div>
+        
+        <div id="connectivity" class="tab-content">
+            <h2>Connectivity Domain</h2>
+            <p>The Connectivity domain contains classes related to electrical connections like Nets, Terms, and Pins.</p>
+            <iframe src="connectivity_domain_visualization.html"></iframe>
+        </div>
+        
+        <div id="hierarchy" class="tab-content">
+            <h2>Hierarchy Domain</h2>
+            <p>The Hierarchy domain contains classes related to design hierarchy like Designs, Blocks, Modules, and Instances.</p>
+            <iframe src="hierarchy_domain_visualization.html"></iframe>
+        </div>
+    </div>
+    
+    <script>
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            
+            // Hide all tab content
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].className = tabcontent[i].className.replace(" active", "");
+            }
+            
+            // Remove active class from all tabs
+            tablinks = document.getElementsByClassName("tab");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            
+            // Show the current tab and add active class
+            document.getElementById(tabName).className += " active";
+            evt.currentTarget.className += " active";
+        }
+    </script>
+</body>
+</html>
