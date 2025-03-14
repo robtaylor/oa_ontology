@@ -268,9 +268,17 @@ def export_to_graphml(graph, output_path):
         }
         export_graph.add_edge(source, target, **export_attrs)
     
-    # Write to GraphML
-    nx.write_graphml(export_graph, output_path)
-    print(f"Domain ontology exported to GraphML: {output_path}")
+    try:
+        # Write to GraphML
+        nx.write_graphml(export_graph, output_path)
+        print(f"Domain ontology exported to GraphML: {output_path}")
+    except AttributeError as e:
+        # Handle numpy float_ error
+        if "float_" in str(e):
+            print(f"Warning: Unable to export to GraphML due to NumPy 2.0 compatibility issue.")
+            print(f"Error details: {str(e)}")
+        else:
+            raise
 
 def generate_domain_report(graph, output_path):
     """Generate a markdown report summarizing the domain ontology."""

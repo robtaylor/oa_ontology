@@ -264,6 +264,13 @@ def save_domain_ontology(graph, output_file, graphml_file):
     try:
         nx.write_graphml(graph, graphml_file)
         print(f"Domain ontology saved as GraphML to {graphml_file}")
+    except AttributeError as e:
+        # Handle numpy float_ error
+        if "float_" in str(e):
+            print(f"Warning: Unable to export to GraphML due to NumPy 2.0 compatibility issue.")
+            print(f"Consider using NumPy version < 2.0 or updating the code to use np.float64 instead of np.float_")
+        else:
+            print(f"Error saving GraphML: {str(e)}")
     except Exception as e:
         print(f"Error saving GraphML: {str(e)}")
 

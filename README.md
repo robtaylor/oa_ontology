@@ -76,7 +76,16 @@ The analysis revealed several interesting aspects of the OpenAccess API:
 
 ### Requirements
 
-Python >= 3.9, [PDM](https://pdm-project.org/en/latest/)
+- Python >= 3.9
+- [PDM](https://pdm-project.org/en/latest/)
+- Required packages (automatically installed by PDM):
+  - networkx
+  - pyyaml
+  - tqdm
+  - beautifulsoup4
+  - tomli
+  - pyvis
+  - lxml (for GraphML export)
 
 ### Setup and Running the Scripts
 
@@ -153,6 +162,33 @@ The GraphML files can be imported into:
 2. Create a new database
 3. Run the contents of `outputs/neo4j_import.cypher` in the Neo4j Browser
 4. Use the queries in `outputs/example_queries.cypher` to explore the ontology
+
+## Troubleshooting
+
+### Common Issues
+
+1. **Missing lxml Error**
+
+   If you get an error about a missing lxml module when exporting to GraphML, make sure you have the lxml package installed:
+
+   ```bash
+   pdm add lxml
+   ```
+
+2. **NumPy 2.0 Compatibility Issue**
+
+   If you encounter errors related to `np.float_` being removed in NumPy 2.0, you have two options:
+   
+   - Use an earlier version of NumPy: `pdm add "numpy<2.0"`
+   - The code has been updated to handle this error gracefully, but GraphML export might not work with NumPy 2.0+
+
+3. **Cross-reference Data Quality Issues**
+
+   The cross-reference validation may show issues with data quality. These are expected and won't prevent the system from working but indicate areas where the data extraction could be improved. Common issues include:
+   
+   - Missing descriptions (50% of classes)
+   - Classes with no methods (about half)
+   - Missing relationships from UML diagrams
 
 ## License
 

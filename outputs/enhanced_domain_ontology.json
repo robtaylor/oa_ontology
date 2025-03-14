@@ -457,7 +457,7 @@
       "domain": "Connectivity",
       "concept": "Term",
       "description": "The oaBusTermBit class implements an oaBitTerm that represents a single bit of an oaBusTerm . When a busTerm is created, a corresponding set of busTermBits is automatically created. When the busTer...",
-      "methods_count": 15
+      "methods_count": 14
     },
     {
       "id": "oaTraits_3_01oaViaVariant_01_4",
@@ -619,7 +619,7 @@
       "domain": "Physical",
       "concept": "Pin",
       "description": "The oaPin class implements an object that represents the physical connections of terminals to nets. A terminal can have multiple pins where multiple physical connections can correspond to one logic...",
-      "methods_count": 21
+      "methods_count": 20
     },
     {
       "id": "oaStdObserver",
@@ -1753,7 +1753,7 @@
       "domain": "Connectivity",
       "concept": "Term",
       "description": "The oaBundleTerm class implements a multi-bit terminal for a block composed of one or more scalarTerms, one or more busTerms, or a combination of scalarTerms and busTerms. When a bundleTerm is crea...",
-      "methods_count": 15
+      "methods_count": 14
     },
     {
       "id": "oaTechHeader",
@@ -3088,15 +3088,6 @@
       "methods_count": 5
     },
     {
-      "id": "oaNetTermConnectDefObserver",
-      "label": "NetTermConnectDefObserver",
-      "type": "Class",
-      "domain": "Connectivity",
-      "concept": "Net",
-      "description": "",
-      "methods_count": 0
-    },
-    {
       "id": "oaBlockDomainVisibility",
       "label": "BlockDomainVisibility",
       "type": "Class",
@@ -3895,7 +3886,7 @@
       "domain": "Connectivity",
       "concept": "Net",
       "description": "The oaNet class is an abstract base class for scalar and multi-bit nets that are part of the design's physical description. Nets represent the logical connectivity within a block of a design. Nets ...",
-      "methods_count": 49
+      "methods_count": 46
     },
     {
       "id": "oaString",
@@ -6751,15 +6742,6 @@
       "methods_count": 0
     },
     {
-      "id": "oaTermNetObserver",
-      "label": "TermNetObserver",
-      "type": "Class",
-      "domain": "Connectivity",
-      "concept": "Net",
-      "description": "",
-      "methods_count": 0
-    },
-    {
       "id": "oaBitOrder",
       "label": "BitOrder",
       "type": "Class",
@@ -6901,7 +6883,7 @@
       "domain": "Connectivity",
       "concept": "Term",
       "description": "The oaTerm class is an abstract base class for all scalar and multi-bit terminals. Terminals represent the logical connection points for a block. The pins associated with terminals represent the ph...",
-      "methods_count": 36
+      "methods_count": 29
     },
     {
       "id": "oaModNetConnectDef",
@@ -8434,15 +8416,6 @@
       "methods_count": 8
     },
     {
-      "id": "oaCellTerm",
-      "label": "CellTerm",
-      "type": "Class",
-      "domain": "Connectivity",
-      "concept": "Term",
-      "description": "",
-      "methods_count": 0
-    },
-    {
       "id": "oaBitOrder-members",
       "label": "BitOrder-members",
       "type": "Class",
@@ -8585,15 +8558,6 @@
       "concept": "Unknown",
       "description": "This is the base class to represent an object reference, containing only a pointer to the sdObject that defines the schema definition for the representation. The srObjectRef class encapsulates the ...",
       "methods_count": 8
-    },
-    {
-      "id": "Unknown_assignment",
-      "label": "Unknown_assignment",
-      "type": "Class",
-      "domain": "Other",
-      "concept": "Unknown",
-      "description": "",
-      "methods_count": 0
     },
     {
       "id": "oaGuideQuery-members",
@@ -9988,7 +9952,7 @@
       "domain": "Connectivity",
       "concept": "Term",
       "description": "The oaBusTermDef class implements the definition of an oaBusTerm , including its base name and bit-range. All oaBusTerms and oaBusTermBits in a block with the same base name are managed by the same...",
-      "methods_count": 19
+      "methods_count": 15
     },
     {
       "id": "sdSession",
@@ -10501,7 +10465,7 @@
       "domain": "Connectivity",
       "concept": "Route",
       "description": "The oaRoute class represents a physical point-to-point connection that is part of a wire. An oaRoute contains a sequence of objects that may describe both the routing segments on given layers and t...",
-      "methods_count": 28
+      "methods_count": 25
     },
     {
       "id": "oaRevisionTraits_3_01oaConstraintDef_01_4",
@@ -10636,7 +10600,7 @@
       "domain": "Other",
       "concept": "Unknown",
       "description": "The oaReducedModel class is an abstract base for all reduced model objects that model the parasitics seen by a driver of a net. ReducedModels are used as simplified representations of the electrica...",
-      "methods_count": 8
+      "methods_count": 4
     },
     {
       "id": "oaBlockage",
@@ -10699,7 +10663,7 @@
       "domain": "Connectivity",
       "concept": "Term",
       "description": "The oaTermConnectDef class implements a connection definition that associates an oaAssignmentDef with a single-bit terminal. The oaAssignmentDef used to create the oaTermConnectDef specifies the na...",
-      "methods_count": 3
+      "methods_count": 2
     },
     {
       "id": "oaPlacementStatus-members",
@@ -11482,7 +11446,7 @@
       "domain": "Connectivity",
       "concept": "Term",
       "description": "The oaBusTerm class implements a terminal that represents one or more bits that are associated by a common baseName and vector-range specification. An oaBusTerm object has a corresponding oaBusTerm...",
-      "methods_count": 21
+      "methods_count": 18
     },
     {
       "id": "oaCollection",
@@ -13334,13 +13298,6 @@
       "description": "Inferred from method getDef"
     },
     {
-      "source": "uml",
-      "target": "oaScalarTerm",
-      "type": "REFERENCES",
-      "description": "oaBitTerm references an oaScalarTerm representing the bit",
-      "member": ""
-    },
-    {
       "source": "api_inferred",
       "target": "oaTermConnectDef",
       "type": "CONTAINS_ONE",
@@ -13376,11 +13333,11 @@
       "description": "Inferred from method getInstance"
     },
     {
-      "source": "uml",
+      "source": "api_inferred",
       "target": "oaBusTermDef",
       "type": "CONTAINS_ONE",
-      "description": "oaBusTermBit contains a reference to its parent oaBusTermDef object",
-      "member": "def"
+      "member": "def",
+      "description": "Inferred from method getDef"
     },
     {
       "source": "api_inferred",
@@ -13390,25 +13347,11 @@
       "description": "Inferred from method getDefaultConstraintGroup"
     },
     {
-      "source": "uml",
+      "source": "api_inferred",
       "target": "oaTerm",
       "type": "CONTAINS_ONE",
-      "description": "oaPin contains a reference to the oaTerm it represents",
-      "member": "term"
-    },
-    {
-      "source": "uml",
-      "target": "oaNet",
-      "type": "REFERENCES",
-      "description": "oaPin can be connected to an oaNet",
-      "member": ""
-    },
-    {
-      "source": "uml",
-      "target": "oaReducedModel",
-      "type": "REFERENCES",
-      "description": "oaPin can have parasitic models attached for timing analysis",
-      "member": ""
+      "member": "term",
+      "description": "Inferred from method getTerm"
     },
     {
       "source": "api_inferred",
@@ -13537,11 +13480,11 @@
       "description": "Inferred from method getLink"
     },
     {
-      "source": "uml",
+      "source": "api_inferred",
       "target": "oaTerm",
-      "type": "CONTAINS_MANY",
-      "description": "oaBundleTerm contains a collection of oaTerm objects in its members array",
-      "member": "members"
+      "type": "CONTAINS_ONE",
+      "member": "member",
+      "description": "Inferred from method getMember"
     },
     {
       "source": "api_inferred",
@@ -13699,24 +13642,24 @@
     },
     {
       "source": "api_inferred",
-      "target": "oaInst",
-      "type": "CONTAINS_ONE",
-      "description": "Inferred from method getInst",
-      "member": "inst"
-    },
-    {
-      "source": "uml",
-      "target": "oaNet",
-      "type": "REFERENCES",
-      "description": "oaInstTerm can be connected to an oaNet",
-      "member": ""
-    },
-    {
-      "source": "api_inferred",
       "target": "oaInstTerm",
       "type": "CONTAINS_ONE",
       "member": "bit",
       "description": "Inferred from method getBit"
+    },
+    {
+      "source": "api_inferred",
+      "target": "oaInst",
+      "type": "CONTAINS_ONE",
+      "member": "inst",
+      "description": "Inferred from method getInst"
+    },
+    {
+      "source": "api_inferred",
+      "target": "oaNet",
+      "type": "CONTAINS_ONE",
+      "member": "net",
+      "description": "Inferred from method getNet"
     },
     {
       "source": "api_inferred",
@@ -13780,13 +13723,6 @@
       "type": "CONTAINS_ONE",
       "member": "inst",
       "description": "Inferred from method getInst"
-    },
-    {
-      "source": "uml",
-      "target": "oaNet",
-      "type": "REFERENCES",
-      "description": "oaNetTermConnectDefObserver watches for changes to Net-Term connections",
-      "member": ""
     },
     {
       "source": "api_inferred",
@@ -13943,27 +13879,6 @@
       "description": "Inferred from method getMasterText"
     },
     {
-      "source": "uml",
-      "target": "oaTerm",
-      "type": "CONTAINS_MANY",
-      "description": "oaNet contains a collection of oaTerm objects connected to it",
-      "member": "terms"
-    },
-    {
-      "source": "uml",
-      "target": "oaRoute",
-      "type": "ASSOCIATED_WITH_MANY",
-      "description": "oaNet contains multiple routes that connect its terms",
-      "member": ""
-    },
-    {
-      "source": "uml",
-      "target": "oaTermConnectDef",
-      "type": "ASSOCIATED_WITH_MANY",
-      "description": "oaNet can be connected to Terms through TermConnectDefs",
-      "member": ""
-    },
-    {
       "source": "api_inferred",
       "target": "oaBitNet",
       "type": "CONTAINS_ONE",
@@ -13976,20 +13891,6 @@
       "type": "CONTAINS_ONE",
       "member": "defaultConstraintGroup",
       "description": "Inferred from method getDefaultConstraintGroup"
-    },
-    {
-      "source": "uml",
-      "target": "oaAssignAssignment",
-      "type": "SPECIALIZES",
-      "description": "oaAssignAssignment inherits from oaAssignment",
-      "member": ""
-    },
-    {
-      "source": "uml",
-      "target": "oaAssignValue",
-      "type": "SPECIALIZES",
-      "description": "oaAssignValue inherits from oaAssignment",
-      "member": ""
     },
     {
       "source": "api_inferred",
@@ -14209,13 +14110,6 @@
       "description": "Inferred from method getShieldedNet2"
     },
     {
-      "source": "uml",
-      "target": "oaBitTerm",
-      "type": "SPECIALIZES",
-      "description": "oaBitTerm inherits from oaScalarTerm",
-      "member": ""
-    },
-    {
       "source": "api_inferred",
       "target": "oaInstHeader",
       "type": "CONTAINS_ONE",
@@ -14249,27 +14143,6 @@
       "type": "CONTAINS_ONE",
       "member": "occShape",
       "description": "Inferred from method getOccShape"
-    },
-    {
-      "source": "uml",
-      "target": "oaAssignAssignment",
-      "type": "USES",
-      "description": "oaAssignmentDef uses oaAssignAssignment",
-      "member": ""
-    },
-    {
-      "source": "uml",
-      "target": "oaNetConnectDef",
-      "type": "USES",
-      "description": "oaAssignmentDef uses oaNetConnectDef",
-      "member": ""
-    },
-    {
-      "source": "uml",
-      "target": "oaTermConnectDef",
-      "type": "USES",
-      "description": "oaAssignmentDef uses oaTermConnectDef",
-      "member": ""
     },
     {
       "source": "api_inferred",
@@ -14489,13 +14362,6 @@
       "description": "Inferred from method getDef"
     },
     {
-      "source": "uml",
-      "target": "oaTerm",
-      "type": "REFERENCES",
-      "description": "oaTermNetObserver watches for changes to Term-Net connections",
-      "member": ""
-    },
-    {
       "source": "api_inferred",
       "target": "oaLayerHeader",
       "type": "CONTAINS_ONE",
@@ -14520,71 +14386,8 @@
       "source": "api_inferred",
       "target": "oaBitTerm",
       "type": "CONTAINS_ONE",
-      "description": "Inferred from method getBit",
-      "member": "bit"
-    },
-    {
-      "source": "uml",
-      "target": "oaPin",
-      "type": "CONTAINS_MANY",
-      "description": "oaTerm can have multiple oaPin objects representing it in different contexts",
-      "member": "pins"
-    },
-    {
-      "source": "uml",
-      "target": "oaBundleTerm",
-      "type": "SPECIALIZES",
-      "description": "oaBundleTerm inherits from oaTerm",
-      "member": ""
-    },
-    {
-      "source": "uml",
-      "target": "oaInstTerm",
-      "type": "SPECIALIZES",
-      "description": "oaInstTerm inherits from oaTerm",
-      "member": ""
-    },
-    {
-      "source": "uml",
-      "target": "oaScalarTerm",
-      "type": "SPECIALIZES",
-      "description": "oaScalarTerm inherits from oaTerm",
-      "member": ""
-    },
-    {
-      "source": "uml",
-      "target": "oaBusTerm",
-      "type": "SPECIALIZES",
-      "description": "oaBusTerm inherits from oaTerm",
-      "member": ""
-    },
-    {
-      "source": "uml",
-      "target": "oaRoute",
-      "type": "CONTAINS_MANY",
-      "description": "oaTerm can have multiple routes connected to it",
-      "member": "routes"
-    },
-    {
-      "source": "uml",
-      "target": "oaReducedModel",
-      "type": "CONTAINS_ONE",
-      "description": "oaTerm can have a parasitic reduced model attached to it",
-      "member": "reducedModel"
-    },
-    {
-      "source": "uml",
-      "target": "oaTerm",
-      "type": "REFERENCES",
-      "description": "oaTerm can reference a parent oaTerm in hierarchical structures",
-      "member": ""
-    },
-    {
-      "source": "uml",
-      "target": "oaTermConnectDef",
-      "type": "REFERENCES",
-      "description": "oaTerm can reference a TermConnectDef that defines its connections",
-      "member": ""
+      "member": "bit",
+      "description": "Inferred from method getBit"
     },
     {
       "source": "api_inferred",
@@ -14627,13 +14430,6 @@
       "type": "CONTAINS_ONE",
       "member": "net",
       "description": "Inferred from method getNet"
-    },
-    {
-      "source": "uml",
-      "target": "oaNet",
-      "type": "ASSOCIATED_WITH",
-      "description": "oaNetConnectDef is associated with oaNet",
-      "member": ""
     },
     {
       "source": "api_inferred",
@@ -14760,20 +14556,6 @@
       "type": "CONTAINS_ONE",
       "member": "otherNode",
       "description": "Inferred from method getOtherNode"
-    },
-    {
-      "source": "uml",
-      "target": "oaNetConnectDef",
-      "type": "SPECIALIZES",
-      "description": "oaNetConnectDef inherits from oaConnectDef",
-      "member": ""
-    },
-    {
-      "source": "uml",
-      "target": "oaTermConnectDef",
-      "type": "SPECIALIZES",
-      "description": "oaTermConnectDef inherits from oaConnectDef",
-      "member": ""
     },
     {
       "source": "api_inferred",
@@ -14914,13 +14696,6 @@
       "type": "CONTAINS_ONE",
       "member": "implant2",
       "description": "Inferred from method getImplant2"
-    },
-    {
-      "source": "uml",
-      "target": "oaTerm",
-      "type": "REFERENCES",
-      "description": "oaCellTerm is a specialized term used in cell libraries",
-      "member": ""
     },
     {
       "source": "api_inferred",
@@ -15154,20 +14929,6 @@
       "description": "Inferred from method getLayerBelow"
     },
     {
-      "source": "uml",
-      "target": "oaBusTermBit",
-      "type": "CONTAINS_MANY",
-      "description": "oaBusTermDef contains a collection of oaBusTermBit objects in its bits array",
-      "member": "bits"
-    },
-    {
-      "source": "uml",
-      "target": "oaBusTerm",
-      "type": "CONTAINS_ONE",
-      "description": "oaBusTermDef contains a reference to a single oaBusTerm as its busTerm member",
-      "member": "busTerm"
-    },
-    {
       "source": "api_inferred",
       "target": "oaPin",
       "type": "CONTAINS_ONE",
@@ -15231,13 +14992,6 @@
       "description": "Inferred from method getViaDef"
     },
     {
-      "source": "uml",
-      "target": "oaTerm",
-      "type": "CONTAINS_ONE",
-      "description": "oaRoute contains a reference to an oaTerm as its starting connection point",
-      "member": "startConn"
-    },
-    {
       "source": "api_inferred",
       "target": "oaBlockObject",
       "type": "CONTAINS_ONE",
@@ -15280,20 +15034,6 @@
       "description": "Inferred from method getDef"
     },
     {
-      "source": "uml",
-      "target": "oaElmore",
-      "type": "CONTAINS_ONE",
-      "description": "oaReducedModel can contain an Elmore delay model",
-      "member": "elmore"
-    },
-    {
-      "source": "uml",
-      "target": "oaPoleResidue",
-      "type": "CONTAINS_ONE",
-      "description": "oaReducedModel can contain a pole-residue model",
-      "member": "poleResidue"
-    },
-    {
       "source": "api_inferred",
       "target": "oaAnalysisPoint",
       "type": "CONTAINS_ONE",
@@ -15313,13 +15053,6 @@
       "type": "CONTAINS_ONE",
       "member": "owner",
       "description": "Inferred from method getOwner"
-    },
-    {
-      "source": "uml",
-      "target": "oaTerm",
-      "type": "ASSOCIATED_WITH",
-      "description": "oaTermConnectDef is associated with oaTerm",
-      "member": ""
     },
     {
       "source": "api_inferred",
@@ -15439,13 +15172,6 @@
       "type": "CONTAINS_ONE",
       "member": "route",
       "description": "Inferred from method getRoute"
-    },
-    {
-      "source": "uml",
-      "target": "oaBusTermBit",
-      "type": "CONTAINS_MANY",
-      "description": "oaBusTerm contains access to its BusTermBit members through the bits() method",
-      "member": "bits"
     },
     {
       "source": "api_inferred",
