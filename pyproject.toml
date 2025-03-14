@@ -62,18 +62,9 @@ fix-enhanced = {call = "scripts.fix_enhanced_ontology:main", help = "Fix enhance
 fix-bundleterm = {call = "scripts.fix_bundle_term:main", help = "Fix issues with oaBundleTerm class description"}
 
 # Visualization
-vis-connected = {
-    call = "scripts.visualize_connected_classes:main", 
-    help = "Create visualization of most connected classes without inheritance"
-}
-vis-enhanced = {
-    call = "scripts.visualize_enhanced_domain:main", 
-    help = "Create domain-specific visualizations"
-}
-create-vis-graph = {
-    call = "oa_ontology.create_visualization_graph:main", 
-    help = "Create simplified graph for visualization"
-}
+vis-connected = {call = "scripts.visualize_connected_classes:main", help = "Create visualization of most connected classes without inheritance"}
+vis-enhanced = {call = "scripts.visualize_enhanced_domain:main", help = "Create domain-specific visualizations"}
+create-vis-graph = {call = "oa_ontology.create_visualization_graph:main", help = "Create simplified graph for visualization"}
 
 [project.urls]
 Homepage = "https://github.com/username/oa-ontology"
