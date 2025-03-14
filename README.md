@@ -13,16 +13,23 @@ The Cadence OpenAccess API is a complex C++ library that provides access to IC d
 
 ## Contents
 
-### Scripts
+### Packages and Scripts
 
-- `build_ontology.py` - Extracts the software class structure from YAML documentation
-- `visualize_ontology.py` - Generates HTML reports and visualizations of the ontology
-- `export_to_neo4j.py` - Exports the ontology to Neo4j-compatible formats
-- `extract_domain_ontology.py` - Extracts the domain concepts and relationships
-- `run_crossref.py` - Cross-references UML diagrams with API documentation
-- `validate_crossref.py` - Validates the cross-referenced data quality
-- `enhanced_domain_ontology.py` - Creates enhanced domain ontology from cross-referenced data
-- `run_enhanced_domain.py` - Runs the enhanced domain ontology extraction
+- **oa_ontology**: Core library package with functionality for ontology extraction and processing
+  - `build_ontology.py` - Extracts the software class structure from YAML documentation
+  - `visualize_ontology.py` - Generates HTML reports and visualizations of the ontology
+  - `export_to_neo4j.py` - Exports the ontology to Neo4j-compatible formats
+  - `extract_domain_ontology.py` - Extracts the domain concepts and relationships
+  - `enhanced_domain_ontology.py` - Creates enhanced domain ontology from cross-referenced data
+  - And more specialized modules for different processing steps
+
+- **scripts**: Utility scripts package with command-line tools
+  - Visualization scripts (visualize_connected_classes.py, visualize_enhanced_domain.py)
+  - UML parsing scripts (parse_all_diagrams.py, parse_all_imagemaps.py)
+  - Data fixing and debugging scripts (debug_extraction.py, fix_enhanced_ontology.py)
+  - Pipeline scripts (run_crossref.py, run_enhanced_domain.py, validate_crossref.py)
+
+For a full list of available scripts and commands, see the [scripts README](scripts/README.md).
 
 ### Documentation
 
@@ -134,19 +141,53 @@ You can also process all steps at once with:
 pdm run oa-run-all
 ```
 
-7. Cross-reference UML diagrams and API documentation:
+7. Parse UML diagrams using computer vision:
+```bash
+pdm run oa-parse-uml
+```
+
+8. Parse HTML image maps for UML information:
+```bash
+pdm run oa-parse-imagemap
+```
+
+9. Extract documentation from HTML:
+```bash
+pdm run oa-doc-extract
+```
+
+10. Cross-reference UML diagrams and API documentation:
 ```bash
 pdm run oa-crossref
 ```
 
-8. Validate the cross-referenced data:
+11. Validate the cross-referenced data:
 ```bash
 pdm run oa-validate-crossref
 ```
 
-9. Generate enhanced domain ontology from cross-referenced data:
+12. Generate enhanced domain ontology from cross-referenced data:
 ```bash
 pdm run oa-enhanced-domain
+```
+
+13. Fix and enhance the ontology for visualization:
+```bash
+pdm run oa-fix-enhanced
+```
+
+14. Create visualizations of the ontology:
+```bash
+# Most connected classes without inheritance
+pdm run oa-vis-connected --limit 75
+
+# Domain-specific visualizations
+pdm run oa-vis-enhanced --domain Physical
+```
+
+For a comprehensive list of all available commands and their options, see the scripts README:
+```bash
+cat scripts/README.md
 ```
 
 ### Visualizing with External Tools

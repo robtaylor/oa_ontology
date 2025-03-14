@@ -26,6 +26,7 @@ requires = ["pdm-backend"]
 build-backend = "pdm.backend"
 
 [project.scripts]
+# Core ontology building tools
 oa-setup = "oa_ontology.init:main"
 oa-parse = "oa_ontology.parse_html:main"
 oa-build = "oa_ontology.build_ontology:main"
@@ -33,16 +34,37 @@ oa-domain = "oa_ontology.extract_domain_ontology:main"
 oa-export = "oa_ontology.export_to_neo4j:main"
 oa-visualize = "oa_ontology.visualize_ontology:main"
 oa-run-all = "oa_ontology.run_all:main"
+
+# Schema and structure tools
 oa-schema = "oa_ontology.schema_to_yaml:main"
-oa-parse-uml = "parse_all_diagrams:main"
 oa-uml-to-yaml = "oa_ontology.structure_to_yaml:main"
-oa-parse-imagemap = "parse_all_imagemaps:main"
-oa-imagemap = "oa_ontology.html_imagemap_parser:main"
 oa-combine-schema = "oa_ontology.combine_schema_structures:main"
+
+# UML parsing tools
+oa-parse-uml = "scripts.parse_all_diagrams:main"
+oa-parse-imagemap = "scripts.parse_all_imagemaps:main"
+oa-imagemap = "oa_ontology.html_imagemap_parser:main"
+oa-test-uml-parser = "scripts.test_improved_parser:main"
+oa-test-structure-parser = "scripts.test_structure_parser:main"
+
+# Documentation extraction
 oa-doc-extract = "oa_ontology.html_doc_extractor:main"
-oa-crossref = "run_crossref:main"
-oa-validate-crossref = "validate_crossref:main"
-oa-enhanced-domain = "run_enhanced_domain:main"
+oa-debug-extraction = "scripts.debug_extraction:main"
+oa-process-busterm = "scripts.process_busterm:main"
+
+# Cross-referencing
+oa-crossref = "scripts.run_crossref:main"
+oa-validate-crossref = "scripts.validate_crossref:main"
+
+# Enhanced domain ontology
+oa-enhanced-domain = "scripts.run_enhanced_domain:main"
+oa-fix-enhanced = "scripts.fix_enhanced_ontology:main"
+oa-fix-bundleterm = "scripts.fix_bundle_term:main"
+
+# Visualization
+oa-vis-connected = "scripts.visualize_connected_classes:main"
+oa-vis-enhanced = "scripts.visualize_enhanced_domain:main"
+oa-create-vis-graph = "oa_ontology.create_visualization_graph:main"
 
 [project.urls]
 Homepage = "https://github.com/username/oa-ontology"
