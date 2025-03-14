@@ -192,13 +192,21 @@ pdm run oa visualize domain --domain Physical
 
 #### Legacy Command Support
 
-All the original script commands are still supported for backward compatibility:
+A small set of legacy commands are still available for backward compatibility and special purposes:
 
 ```bash
-pdm run parse
-pdm run build
-pdm run domain
-# etc.
+# Core workflow commands
+pdm run setup    # Set up the environment
+pdm run run-all  # Run the full extraction pipeline
+
+# Visualization shortcuts
+pdm run vis-connected  # Connected classes visualization
+pdm run vis-enhanced   # Domain-specific visualization
+
+# Testing and debugging
+pdm run test-uml-parser      # Test the UML parser
+pdm run test-structure-parser  # Test the structure parser
+pdm run debug-extraction     # Debug HTML extraction issues
 ```
 
 You can view all available commands with:
@@ -206,6 +214,8 @@ You can view all available commands with:
 ```bash
 pdm run --list
 ```
+
+For all other functionality, use the unified CLI with the `oa` command as described above.
 
 ### Visualizing with External Tools
 
