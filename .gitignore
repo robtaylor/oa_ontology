@@ -50,6 +50,27 @@ Thumbs.db
 temp/
 .pdm-python
 config.json
+
+# Downloaded source content
 html_source/
+
+# Output directories
 ontology_output/
 yaml_output/
+
+# Generated files
+outputs/debug/
+outputs/temp/
+outputs/*_visualization.html
+outputs/*.graphml
+outputs/*.json
+!outputs/visualization_graph.json
+!outputs/enhanced_domain_ontology.json
+!outputs/enhanced_domain_ontology_fixed.json
+
+# Temporary files
+foo
+*.tmp
+*.bak
+*.swp
+*~
