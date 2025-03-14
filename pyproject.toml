@@ -16,6 +16,14 @@ dependencies = [
     "tomli>=2.0.0"
 ]
 
+# Optional dependencies for UML diagram parsing
+[project.optional-dependencies]
+uml = [
+    "pytesseract>=0.3.10",
+    "opencv-python>=4.6.0",
+    "numpy>=1.23.0"
+]
+
 [build-system]
 requires = ["pdm-backend"]
 build-backend = "pdm.backend"
@@ -38,6 +46,7 @@ oa-domain = "oa_ontology.extract_domain_ontology:main"
 oa-export = "oa_ontology.export_to_neo4j:main"
 oa-visualize = "oa_ontology.visualize_ontology:main"
 oa-run-all = "oa_ontology.run_all:main"
+oa-schema = "oa_ontology.schema_to_yaml:main"
 
 [project.urls]
 Homepage = "https://github.com/username/oa-ontology"
