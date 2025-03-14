@@ -4,6 +4,51 @@ def extract_methods_from_table(soup):
     """Extract method information from the HTML tables in Public Methods sections."""
     methods = []
     
+    # Initial direct scan for method anchors across the whole document
+    for anchor in soup.find_all('a', {'doxytag': re.compile(r'.*::(create|find|get|set|is|has|init)')}):
+        # Found a method anchor with a doxytag format like "className::methodName"
+        doxytag = anchor.get('doxytag', '')
+        if '::' in doxytag:
+            class_name, method_name = doxytag.split('::', 1)
+            
+            # Find the method's details - first try to locate the table containing method info
+            method_table = anchor.find_next('table')
+            if not method_table:
+                continue
+                
+            method_cell = method_table.find('td', class_='md')
+            if not method_cell:
+                continue
+            
+            # Extract method text with full signature
+            method_text = method_cell.text.strip()
+            
+            # Extract return type and method name from method text
+            sig_match = re.search(r'([a-zA-Z0-9_*<>: ]+?)\s+(?:\w+::)?(\w+)', method_text)
+            if sig_match:
+                return_type = sig_match.group(1).strip()
+                method_name = sig_match.group(2).strip()
+            else:
+                continue
+            
+            # Extract parameters
+            params_match = re.search(re.escape(method_name) + r'\s*\((.*?)\)', method_text, re.DOTALL)
+            params = params_match.group(1).strip() if params_match else ""
+            
+            # Clean up parameters (remove newlines)
+            params = re.sub(r'\s+', ' ', params)
+            
+            # Check if static 
+            is_static_method = '[static]' in method_text or '[static]' in str(method_table)
+            
+            methods.append({
+                'name': method_name,
+                'signature': f"{method_name}({params})",
+                'return_type': return_type,
+                'description': "This function is a member of this class.",
+                'is_static': is_static_method
+            })
+    
     # Find all method tables (Public Methods and Static Public Methods sections)
     for section_name in ["Public Methods", "Static Public Methods", "Protected Methods"]:
         is_static = "Static" in section_name
@@ -167,6 +212,7 @@ def extract_methods_from_table(soup):
                         'is_static': method_is_static
                     })
                 
+
                 # Structure 2: Method signatures in nested tables
                 if not methods:
                     # Check for nested tables with complex method signatures
@@ -248,10 +294,25 @@ def extract_methods_from_table(soup):
             
         filtered_methods.append(method)
     
-    # Remove duplicate methods
-    unique_methods = {}
+    # Group overloaded methods by name
+    grouped_methods = {}
     for method in filtered_methods:
-        if method['name'] not in unique_methods:
-            unique_methods[method['name']] = method
+        method_name = method['name']
+        if method_name not in grouped_methods:
+            grouped_methods[method_name] = []
+        grouped_methods[method_name].append(method)
     
-    return list(unique_methods.values())
+    # For each overloaded method, keep all unique signatures
+    unique_methods = []
+    for method_name, method_variants in grouped_methods.items():
+        # Track unique signatures to avoid duplicates
+        unique_signatures = set()
+        for method in method_variants:
+            if method['signature'] not in unique_signatures:
+                unique_signatures.add(method['signature'])
+                unique_methods.append(method)
+    
+    # Sort methods by name
+    sorted_methods = sorted(unique_methods, key=lambda m: m['name'])
+    
+    return sorted_methods

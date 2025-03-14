@@ -16,6 +16,8 @@ with open('config.json', 'r') as f:
 
 # Constants
 ONTOLOGY_FILE = Path(CONFIG["ontology_dir"]) / "design_ontology.json"
+DOMAIN_ONTOLOGY_FILE = Path(CONFIG["ontology_dir"]) / "domain_ontology.json"
+ENHANCED_ONTOLOGY_FILE = Path("outputs") / "enhanced_domain_ontology.json"
 OUTPUT_DIR = Path(CONFIG["ontology_dir"])
 
 def clean_property_value(value):
@@ -187,35 +189,103 @@ def export_to_graphml(ontology_data, output_path):
 
 def main():
     """Main function to export the ontology to Neo4j formats."""
-    print("Exporting OpenAccess design ontology to Neo4j formats...")
-    
-    # Check if ontology file exists
-    if not os.path.exists(ONTOLOGY_FILE):
-        print(f"Error: Ontology file {ONTOLOGY_FILE} not found. Run build_ontology.py first.")
-        return
+    print("Exporting OpenAccess ontologies to Neo4j formats...")
     
     # Create output directory
     os.makedirs(OUTPUT_DIR, exist_ok=True)
+    os.makedirs("outputs", exist_ok=True)
     
-    # Load the ontology data
-    with open(ONTOLOGY_FILE, 'r') as f:
-        ontology_data = json.load(f)
+    # Export design ontology
+    if os.path.exists(ONTOLOGY_FILE):
+        print("Processing design ontology...")
+        
+        # Load the ontology data
+        with open(ONTOLOGY_FILE, 'r') as f:
+            ontology_data = json.load(f)
+        
+        # Generate Neo4j import script
+        import_script = generate_neo4j_import_script(ontology_data)
+        with open(os.path.join(OUTPUT_DIR, "neo4j_import.cypher"), 'w') as f:
+            f.write(import_script)
+        
+        # Generate common Cypher queries
+        queries = generate_cypher_queries(ontology_data)
+        with open(os.path.join(OUTPUT_DIR, "example_queries.cypher"), 'w') as f:
+            f.write(queries)
+        
+        # Export to GraphML
+        export_to_graphml(ontology_data, os.path.join(OUTPUT_DIR, "design_ontology.graphml"))
+    else:
+        print(f"Warning: Design ontology file {ONTOLOGY_FILE} not found. Skipping design ontology export.")
     
-    # Generate Neo4j import script
-    import_script = generate_neo4j_import_script(ontology_data)
-    with open(os.path.join(OUTPUT_DIR, "neo4j_import.cypher"), 'w') as f:
-        f.write(import_script)
+    # Export enhanced domain ontology
+    if os.path.exists(ENHANCED_ONTOLOGY_FILE):
+        print("Processing enhanced domain ontology...")
+        
+        # Load the enhanced domain ontology data
+        with open(ENHANCED_ONTOLOGY_FILE, 'r') as f:
+            enhanced_data = json.load(f)
+        
+        # Generate Neo4j import script for enhanced domain ontology
+        enhanced_import_script = generate_neo4j_import_script(enhanced_data)
+        with open(os.path.join("outputs", "enhanced_neo4j_import.cypher"), 'w') as f:
+            f.write(enhanced_import_script)
+        
+        # Generate specialized Cypher queries for enhanced domain ontology
+        # These queries can leverage the richer relationship types in the enhanced ontology
+        enhanced_queries = """// Enhanced Domain Ontology Cypher Queries
+        
+// Find classes with specific relationship types
+MATCH (c:Class)-[r:SPECIALIZES]->(parent:Class)
+RETURN c.name AS Class, parent.name AS ParentClass
+LIMIT 20;
+
+// Find composition relationships
+MATCH (c:Class)-[r:COMPOSED_OF]->(part:Class)
+RETURN c.name AS Whole, collect(part.name) AS Parts
+ORDER BY size(Parts) DESC
+LIMIT 10;
+
+// Find classes that reference many other classes
+MATCH (c:Class)-[r:REFERENCES]->(ref:Class)
+RETURN c.name AS Class, count(r) AS ReferenceCount
+ORDER BY ReferenceCount DESC
+LIMIT 10;
+
+// Find the container hierarchy
+MATCH (c:Class)-[r:CONTAINS_ONE|CONTAINS_MANY]->(contained:Class)
+RETURN c.name AS Container, 
+       collect({class: contained.name, type: type(r)}) AS ContainedClasses
+ORDER BY size(ContainedClasses) DESC
+LIMIT 15;
+
+// Find relationships by source
+MATCH (c:Class)-[r]->(other:Class)
+WHERE r.source IS NOT NULL
+RETURN r.source AS Source, count(r) AS Count
+ORDER BY Count DESC;
+
+// Find classes with both UML and API relationships
+MATCH (c:Class)-[r1]->(other1:Class)
+WHERE r1.source = 'uml'
+WITH c, count(r1) AS umlCount
+MATCH (c)-[r2]->(other2:Class)
+WHERE r2.source = 'api_inferred'
+RETURN c.name AS Class, umlCount, count(r2) AS apiCount
+ORDER BY (umlCount + count(r2)) DESC
+LIMIT 20;
+"""
+        with open(os.path.join("outputs", "enhanced_queries.cypher"), 'w') as f:
+            f.write(enhanced_queries)
+        
+        # Export to GraphML (already exported by enhanced_domain_ontology.py)
+        print("Enhanced domain ontology GraphML already exported.")
+    else:
+        print(f"Warning: Enhanced domain ontology file {ENHANCED_ONTOLOGY_FILE} not found.")
+        print("Run enhanced_domain_ontology.py first to generate the enhanced domain ontology.")
     
-    # Generate common Cypher queries
-    queries = generate_cypher_queries(ontology_data)
-    with open(os.path.join(OUTPUT_DIR, "example_queries.cypher"), 'w') as f:
-        f.write(queries)
-    
-    # Export to GraphML
-    export_to_graphml(ontology_data, os.path.join(OUTPUT_DIR, "design_ontology.graphml"))
-    
-    print("Done! Neo4j files have been created in the ontology_output directory.")
-    print("You can use these files to import the ontology into Neo4j or other graph databases.")
+    print("Done! Neo4j files have been created in the output directories.")
+    print("You can use these files to import the ontologies into Neo4j or other graph databases.")
 
 if __name__ == "__main__":
     main()

@@ -28,16 +28,6 @@ uml = [
 requires = ["pdm-backend"]
 build-backend = "pdm.backend"
 
-[tool.pdm]
-distribution = true
-
-[tool.pdm.dev-dependencies]
-dev = [
-    "black>=23.3.0",
-    "pylint>=2.17.0",
-    "pytest>=7.3.1",
-]
-
 [project.scripts]
 oa-setup = "oa_ontology.init:main"
 oa-parse = "oa_ontology.parse_html:main"
@@ -47,6 +37,15 @@ oa-export = "oa_ontology.export_to_neo4j:main"
 oa-visualize = "oa_ontology.visualize_ontology:main"
 oa-run-all = "oa_ontology.run_all:main"
 oa-schema = "oa_ontology.schema_to_yaml:main"
+oa-parse-uml = "parse_all_diagrams:main"
+oa-uml-to-yaml = "oa_ontology.structure_to_yaml:main"
+oa-parse-imagemap = "parse_all_imagemaps:main"
+oa-imagemap = "oa_ontology.html_imagemap_parser:main"
+oa-combine-schema = "oa_ontology.combine_schema_structures:main"
+oa-doc-extract = "oa_ontology.html_doc_extractor:main"
+oa-crossref = "run_crossref:main"
+oa-validate-crossref = "validate_crossref:main"
+oa-enhanced-domain = "run_enhanced_domain:main"
 
 [project.urls]
 Homepage = "https://github.com/username/oa-ontology"
@@ -63,3 +62,17 @@ modules = ["design", "base", "tech", "cms", "wafer", "block"]
 html_dir = "html_source"
 yaml_dir = "yaml_output"
 ontology_dir = "ontology_output"
+
+[tool.pdm]
+distribution = true
+
+
+[dependency-groups]
+dev = [
+    "black>=23.3.0",
+    "pylint>=2.17.0",
+    "pytest>=7.3.1",
+    "pytesseract>=0.3.13",
+    "opencv-python>=4.11.0.86",
+    "numpy>=2.0.2",
+]

@@ -108,6 +108,8 @@ class OpenAccessHTMLParser:
                         # Join the content pieces
                         full_content = ' '.join(content)
                         # Clean it up to ensure we only get the description
+                        # Remove any HTML tags that might be in the content
+                        full_content = re.sub(r'<[^>]+>', ' ', full_content)
                         # Find the first sentence(s) until "Member Function Documentation"
                         member_func_idx = full_content.find("Member Function Documentation")
                         if member_func_idx > 0:
@@ -157,19 +159,30 @@ class OpenAccessHTMLParser:
             description = re.sub(r'<[^>]+>', ' ', description)
             # Fix the common angle bracket issues in oaObserver references
             description = re.sub(r'oaObserver\s*', 'oaObserver<oaBlock>', description)
+            # Replace HTML entities
+            description = description.replace('&lt;', '<').replace('&gt;', '>').replace('&amp;', '&')
             # Clean up common artifacts
             description = re.sub(r'\[static\]', '', description)
             description = re.sub(r'\[virtual\]', '', description)
+            description = re.sub(r'(?i)see also', '', description)
             # Remove multiple spaces
             description = re.sub(r' {2,}', ' ', description)
             # Remove references to documentation files
-            description = re.sub(r'The documentation for this class was generated', '', description)
+            description = re.sub(r'The documentation for this class was generated.*', '', description)
             # Remove empty parentheses
             description = re.sub(r'\(\s*\)', '', description)
-            # Remove "Member Function Documentation" and everything after
-            member_func_idx = description.find("Member Function Documentation")
-            if member_func_idx > 0:
-                description = description[:member_func_idx].strip()
+            # Remove Return to top of page and common navigation elements
+            description = re.sub(r'Return to top of page', '', description)
+            description = re.sub(r'Copyright .* Cadence Design Systems, Inc\..*', '', description)
+            description = re.sub(r'All Rights Reserved\.', '', description)
+            # Remove common sections and everything after
+            for section_marker in ["Member Function Documentation", "Member Data Documentation", 
+                                  "Protected Member Functions", "Protected Attributes",
+                                  "See Also", "Author", "Return Values"]:
+                member_func_idx = description.find(section_marker)
+                if member_func_idx > 0:
+                    description = description[:member_func_idx].strip()
+                    break
         
         return description.strip()
     

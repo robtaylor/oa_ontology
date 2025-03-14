@@ -41,6 +41,8 @@ def main():
         ("oa_ontology.parse_html", "Parse HTML documentation into YAML"),
         ("oa_ontology.build_ontology", "Extract software ontology"),
         ("oa_ontology.extract_domain_ontology", "Extract domain ontology"),
+        ("oa_ontology.crossref_api_uml", "Cross-reference UML diagrams with API documentation"),
+        ("oa_ontology.enhanced_domain_ontology", "Extract enhanced domain ontology"),
         ("oa_ontology.visualize_ontology", "Generate visualizations and reports"),
         ("oa_ontology.export_to_neo4j", "Export to Neo4j and GraphML formats")
     ]
@@ -77,6 +79,16 @@ def main():
             print(f"- Software ontology: {ontology_dir}/design_ontology.json")
             print(f"- Domain ontology: {ontology_dir}/domain_ontology.json")
             print(f"- Domain report: {ontology_dir}/domain_ontology_report.md")
+            
+            # Check for enhanced domain ontology
+            enhanced_dir = Path("outputs")
+            if enhanced_dir.exists():
+                enhanced_domain = enhanced_dir / "enhanced_domain_ontology.json"
+                enhanced_report = enhanced_dir / "enhanced_domain_ontology_report.md"
+                if enhanced_domain.exists():
+                    print(f"- Enhanced domain ontology: {enhanced_domain}")
+                if enhanced_report.exists():
+                    print(f"- Enhanced domain report: {enhanced_report}")
             
             # Check for visualization report
             viz_report = Path(ontology_dir) / "visualizations" / "ontology_report.html"

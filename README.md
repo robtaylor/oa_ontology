@@ -19,12 +19,18 @@ The Cadence OpenAccess API is a complex C++ library that provides access to IC d
 - `visualize_ontology.py` - Generates HTML reports and visualizations of the ontology
 - `export_to_neo4j.py` - Exports the ontology to Neo4j-compatible formats
 - `extract_domain_ontology.py` - Extracts the domain concepts and relationships
+- `run_crossref.py` - Cross-references UML diagrams with API documentation
+- `validate_crossref.py` - Validates the cross-referenced data quality
+- `enhanced_domain_ontology.py` - Creates enhanced domain ontology from cross-referenced data
+- `run_enhanced_domain.py` - Runs the enhanced domain ontology extraction
 
 ### Documentation
 
 - `README.md` - This file
 - `ontology_README.md` - Detailed documentation of the software ontology
 - `domain_ontology_summary.md` - Analysis of the domain concepts and relationships
+- `CROSSREF_README.md` - Documentation of the cross-referencing system
+- `ENHANCED_DOMAIN_README.md` - Documentation of the enhanced domain ontology
 
 ### Outputs
 
@@ -36,6 +42,11 @@ The Cadence OpenAccess API is a complex C++ library that provides access to IC d
 - `outputs/example_queries.cypher` - Example Neo4j queries
 - `outputs/domain_ontology_report.md` - Detailed report on domain concepts
 - `outputs/ontology_metrics.json` - Statistics about the ontology
+- `ontology_output/crossref/*.json` - Cross-referenced class data
+- `ontology_output/crossref/crossref_report.md` - Summary report of cross-referencing
+- `outputs/enhanced_domain_ontology.json` - Enhanced domain ontology from cross-referenced data
+- `outputs/enhanced_domain_ontology.graphml` - Enhanced domain ontology in GraphML format
+- `outputs/enhanced_domain_ontology_report.md` - Report on the enhanced domain ontology
 
 ## Key Findings
 
@@ -112,6 +123,21 @@ pdm run oa-domain
 You can also process all steps at once with:
 ```bash
 pdm run oa-run-all
+```
+
+7. Cross-reference UML diagrams and API documentation:
+```bash
+pdm run oa-crossref
+```
+
+8. Validate the cross-referenced data:
+```bash
+pdm run oa-validate-crossref
+```
+
+9. Generate enhanced domain ontology from cross-referenced data:
+```bash
+pdm run oa-enhanced-domain
 ```
 
 ### Visualizing with External Tools
