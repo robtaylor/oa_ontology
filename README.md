@@ -175,14 +175,7 @@ The GraphML files can be imported into:
    pdm add lxml
    ```
 
-2. **NumPy 2.0 Compatibility Issue**
-
-   If you encounter errors related to `np.float_` being removed in NumPy 2.0, you have two options:
-   
-   - Use an earlier version of NumPy: `pdm add "numpy<2.0"`
-   - The code has been updated to handle this error gracefully, but GraphML export might not work with NumPy 2.0+
-
-3. **Cross-reference Data Quality Issues**
+2. **Cross-reference Data Quality Issues**
 
    The cross-reference validation may show issues with data quality. These are expected and won't prevent the system from working but indicate areas where the data extraction could be improved. Common issues include:
    
