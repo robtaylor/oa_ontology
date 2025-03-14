@@ -140,7 +140,26 @@ def extract_source_class(json_file, output_file):
     print(f"Created visualization graph with {len(vis_data['nodes'])} nodes and {len(vis_data['links'])} edges")
     print(f"Saved to {output_file}")
 
+def main():
+    """Main entry point for the script, with command line argument support."""
+    import argparse
+    
+    parser = argparse.ArgumentParser(
+        description="Create a simplified graph for visualization from the enhanced domain ontology."
+    )
+    parser.add_argument(
+        "--input", "-i",
+        default="outputs/enhanced_domain_ontology.json",
+        help="Input JSON file path (default: outputs/enhanced_domain_ontology.json)"
+    )
+    parser.add_argument(
+        "--output", "-o",
+        default="outputs/visualization_graph.json",
+        help="Output JSON file path (default: outputs/visualization_graph.json)"
+    )
+    
+    args = parser.parse_args()
+    extract_source_class(args.input, args.output)
+
 if __name__ == "__main__":
-    input_file = "outputs/enhanced_domain_ontology.json"
-    output_file = "outputs/visualization_graph.json"
-    extract_source_class(input_file, output_file)
+    main()

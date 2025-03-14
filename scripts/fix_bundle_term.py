@@ -57,8 +57,28 @@ def extract_class_description(html_file):
     return description
 
 def main():
-    """Fix the oaBundleTerm description."""
-    html_file = "html_source/design/classoaBundleTerm.html"
+    """Fix the oaBundleTerm description with command line argument support."""
+    import argparse
+    
+    parser = argparse.ArgumentParser(
+        description="Fix the oaBundleTerm class description and clean up method return types."
+    )
+    parser.add_argument(
+        "--html-file", 
+        default="html_source/design/classoaBundleTerm.html",
+        help="Path to the HTML file (default: html_source/design/classoaBundleTerm.html)"
+    )
+    parser.add_argument(
+        "--json-file",
+        default="yaml_output/api_docs/oaBundleTerm.json",
+        help="Path to the JSON file (default: yaml_output/api_docs/oaBundleTerm.json)"
+    )
+    
+    args = parser.parse_args()
+    
+    html_file = args.html_file
+    json_file = args.json_file
+    
     if not os.path.exists(html_file):
         print(f"Error: {html_file} not found")
         return
@@ -67,8 +87,6 @@ def main():
     description = extract_class_description(html_file)
     print(f"Extracted description: {description[:100]}...")
     
-    # Load the current JSON
-    json_file = "yaml_output/api_docs/oaBundleTerm.json"
     if not os.path.exists(json_file):
         print(f"Error: {json_file} not found")
         return

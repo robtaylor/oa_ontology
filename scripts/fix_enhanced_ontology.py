@@ -134,7 +134,26 @@ def fix_json_structure(input_file, output_file):
     
     print("Done!")
 
+def main():
+    """Main entry point for the script, with command line argument support."""
+    import argparse
+    
+    parser = argparse.ArgumentParser(
+        description="Fix the enhanced domain ontology JSON structure for visualization."
+    )
+    parser.add_argument(
+        "--input", "-i",
+        default="outputs/enhanced_domain_ontology.json",
+        help="Input JSON file path (default: outputs/enhanced_domain_ontology.json)"
+    )
+    parser.add_argument(
+        "--output", "-o",
+        default="outputs/enhanced_domain_ontology_fixed.json",
+        help="Output JSON file path (default: outputs/enhanced_domain_ontology_fixed.json)"
+    )
+    
+    args = parser.parse_args()
+    fix_json_structure(args.input, args.output)
+
 if __name__ == "__main__":
-    input_file = "outputs/enhanced_domain_ontology.json"
-    output_file = "outputs/enhanced_domain_ontology_fixed.json"
-    fix_json_structure(input_file, output_file)
+    main()
