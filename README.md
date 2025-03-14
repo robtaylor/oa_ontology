@@ -94,7 +94,7 @@ The analysis revealed several interesting aspects of the OpenAccess API:
   - pyvis
   - lxml (for GraphML export)
 
-### Setup and Running the Scripts
+### Setup and Running the Unified CLI
 
 First, install the project with PDM:
 
@@ -102,95 +102,107 @@ First, install the project with PDM:
 pdm install
 ```
 
-1. Setup the environment and download documentation:
-```bash
-pdm run setup
-```
-This will:
-- Clone the OpenAccess HTML documentation from GitHub
-- Set up the directory structure
-- Create a configuration file
+The project provides a unified CLI tool that consolidates all functionality into a hierarchical command structure:
 
-2. Parse the HTML documentation into YAML:
 ```bash
-pdm run parse
+pdm run oa <command> <subcommand> [options]
 ```
 
-3. Extract the software ontology:
+To see all available commands:
+
 ```bash
-pdm run build
+pdm run oa --help
 ```
 
-4. Generate reports and visualizations:
-```bash
-pdm run visualize
-```
+#### Main Command Groups
 
-5. Export to Neo4j:
-```bash
-pdm run export
-```
+1. **Process Commands**: Process data from OpenAccess documentation
+   ```bash
+   pdm run oa process --help
+   ```
+   - `html`: Parse HTML documentation into YAML format
+   - `build`: Build the software class ontology
+   - `domain`: Extract domain concepts from class ontology
+   - `export`: Export ontology to Neo4j-compatible format
 
-6. Extract the domain ontology:
-```bash
-pdm run domain
-```
+2. **UML Commands**: Process UML diagrams and image maps
+   ```bash
+   pdm run oa uml --help
+   ```
+   - `diagram`: Process UML diagrams using computer vision
+   - `imagemap`: Parse HTML image maps for UML information
+   - `combine`: Combine multiple schema structures
+   - `to-yaml`: Convert UML structure to YAML format
 
-You can also process all steps at once with:
+3. **Cross-Reference Commands**: Cross-reference and enhance ontology data
+   ```bash
+   pdm run oa crossref --help
+   ```
+   - `run`: Run the cross-referencing process
+   - `validate`: Validate the cross-referenced data quality
+   - `enhance`: Generate enhanced domain ontology from cross-referenced data
+   - `fix`: Fix enhanced ontology structure for visualization
+
+4. **Visualization Commands**: Create visualizations of the ontology
+   ```bash
+   pdm run oa visualize --help
+   ```
+   - `basic`: Generate basic visualizations of the ontology
+   - `connected`: Create visualization of most connected classes without inheritance
+   - `domain`: Create domain-specific visualizations
+   - `graph`: Create simplified graph for visualization
+
+#### Common Workflows
+
+**Basic Ontology Creation:**
 ```bash
+# Setup and process the basic ontology
+pdm run oa process html
+pdm run oa process build
+pdm run oa process domain
+
+# Or use the workflow command
 pdm run run-all
 ```
 
-You can list all available scripts with:
+**UML Extraction and Processing:**
 ```bash
-pdm run --list
+# Process UML diagrams
+pdm run oa uml diagram
+pdm run oa uml imagemap
+pdm run oa uml combine
 ```
 
-7. Parse UML diagrams using computer vision:
+**Cross-Referencing and Enhancement:**
 ```bash
-pdm run parse-uml
+# Cross-reference and enhance the ontology
+pdm run oa crossref run
+pdm run oa crossref validate
+pdm run oa crossref enhance
+pdm run oa crossref fix
 ```
 
-8. Parse HTML image maps for UML information:
+**Create Visualizations:**
 ```bash
-pdm run parse-imagemap
+# Create various visualizations
+pdm run oa visualize graph
+pdm run oa visualize connected --limit 75
+pdm run oa visualize domain --domain Physical
 ```
 
-9. Extract documentation from HTML:
+#### Legacy Command Support
+
+All the original script commands are still supported for backward compatibility:
+
 ```bash
-pdm run doc-extract
+pdm run parse
+pdm run build
+pdm run domain
+# etc.
 ```
 
-10. Cross-reference UML diagrams and API documentation:
-```bash
-pdm run crossref
-```
+You can view all available commands with:
 
-11. Validate the cross-referenced data:
-```bash
-pdm run validate-crossref
-```
-
-12. Generate enhanced domain ontology from cross-referenced data:
-```bash
-pdm run enhanced-domain
-```
-
-13. Fix and enhance the ontology for visualization:
-```bash
-pdm run fix-enhanced
-```
-
-14. Create visualizations of the ontology:
-```bash
-# Most connected classes without inheritance
-pdm run vis-connected --limit 75
-
-# Domain-specific visualizations
-pdm run vis-enhanced --domain Physical
-```
-
-For a comprehensive list of all available commands and their options, see the scripts README or run:
 ```bash
 pdm run --list
 ```

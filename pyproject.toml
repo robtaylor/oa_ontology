@@ -25,8 +25,14 @@ dependencies = [
 requires = ["pdm-backend"]
 build-backend = "pdm.backend"
 
+[project.scripts]
+oa = "oa_ontology.oa:main"
+
 [tool.pdm.scripts]
-# Core ontology building tools
+# Unified CLI
+oa = {call = "oa_ontology.cli:main", help = "Unified OpenAccess Ontology Explorer CLI tool"}
+
+# Legacy script aliases (for backward compatibility)
 setup = {call = "oa_ontology.init:main", help = "Download and setup the OpenAccess documentation"}
 parse = {call = "oa_ontology.parse_html:main", help = "Parse HTML documentation into YAML format"}
 build = {call = "oa_ontology.build_ontology:main", help = "Build the software class ontology"}
@@ -55,8 +61,6 @@ process-busterm = {call = "scripts.process_busterm:main", help = "Extract and ve
 # Cross-referencing
 crossref = {call = "scripts.run_crossref:main", help = "Cross-reference UML diagrams with API documentation"}
 validate-crossref = {call = "scripts.validate_crossref:main", help = "Validate cross-referenced data quality"}
-
-# Enhanced domain ontology
 enhanced-domain = {call = "scripts.run_enhanced_domain:main", help = "Generate enhanced domain ontology"}
 fix-enhanced = {call = "scripts.fix_enhanced_ontology:main", help = "Fix enhanced ontology structure for visualization"}
 fix-bundleterm = {call = "scripts.fix_bundle_term:main", help = "Fix issues with oaBundleTerm class description"}
