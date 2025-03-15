@@ -10,7 +10,6 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
 lib64/
 parts/
 sdist/
@@ -59,6 +58,12 @@ html_source/
 ontology_output/
 yaml_output/
 outputs/
+
+# Exclude lib directory but track it in git
+!lib/
+!lib/bindings/
+!lib/tom-select/
+!lib/vis-9.1.2/
 
 # Temporary files
 foo

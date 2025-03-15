@@ -17,6 +17,12 @@ ENHANCED_DIR = Path("outputs")
 CROSSREF_DIR = Path("ontology_output/crossref")
 VISUALIZATION_DIR = Path("ontology_output/visualizations")
 
+# Library directories
+LIB_DIR = ENHANCED_DIR / "lib"
+LIB_BINDINGS_DIR = LIB_DIR / "bindings"
+LIB_TOM_SELECT_DIR = LIB_DIR / "tom-select"
+LIB_VIS_DIR = LIB_DIR / "vis-9.1.2"
+
 # Debug settings
 DEBUG = False
 
@@ -55,7 +61,12 @@ REQUIRED_DIRECTORIES = [
     TECH_MODULE_DIR,
     CMS_MODULE_DIR,
     WAFER_MODULE_DIR,
-    BLOCK_MODULE_DIR
+    BLOCK_MODULE_DIR,
+    # Library directories
+    LIB_DIR,
+    LIB_BINDINGS_DIR,
+    LIB_TOM_SELECT_DIR,
+    LIB_VIS_DIR
 ]
 
 def load_config(config_file="config.json"):
