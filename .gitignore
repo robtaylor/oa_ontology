@@ -55,14 +55,10 @@ config.json
 html_source/
 
 # Output directories - all contents are generated
+# These directories will be created by the code at runtime
 ontology_output/
 yaml_output/
 outputs/
-
-# Ensure we don't ignore the output directories themselves
-!outputs/.gitkeep
-!ontology_output/.gitkeep 
-!yaml_output/.gitkeep
 
 # Temporary files
 foo

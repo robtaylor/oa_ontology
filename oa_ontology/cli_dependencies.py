@@ -138,6 +138,9 @@ def ensure_prerequisites(command, subcommand, verbose=False, visit_history=None)
     Returns:
         bool: True if all prerequisites are satisfied, False otherwise
     """
+    # Always ensure directories exist before checking prerequisites
+    check_directories()
+    
     # Initialize visit history on first call
     if visit_history is None:
         visit_history = set()

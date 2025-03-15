@@ -48,7 +48,14 @@ REQUIRED_DIRECTORIES = [
     OUTPUT_DIR,
     CROSSREF_DIR,
     ENHANCED_DIR,
-    VISUALIZATION_DIR
+    VISUALIZATION_DIR,
+    # Module directories
+    DESIGN_MODULE_DIR,
+    BASE_MODULE_DIR,
+    TECH_MODULE_DIR,
+    CMS_MODULE_DIR,
+    WAFER_MODULE_DIR,
+    BLOCK_MODULE_DIR
 ]
 
 def load_config(config_file="config.json"):
