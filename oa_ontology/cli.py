@@ -9,6 +9,7 @@ import argparse
 import sys
 import os
 import importlib
+from oa_ontology.cli_dependencies import ensure_prerequisites, check_directories
 
 
 def setup_process_commands(subparsers):
@@ -390,6 +391,11 @@ def main():
         action='store_true',
         help='Enable verbose output'
     )
+    parser.add_argument(
+        '--no-deps', '-n',
+        action='store_true',
+        help='Skip running prerequisites automatically'
+    )
     
     # Create subparsers for main commands
     subparsers = parser.add_subparsers(
@@ -409,8 +415,31 @@ def main():
         parser.print_help()
         return 1
     
+    # Ensure directories exist
+    check_directories()
+    
     # Handle command dispatching
     try:
+        # Determine subcommand
+        subcommand = None
+        if args.command == 'process' and hasattr(args, 'process_command'):
+            subcommand = args.process_command
+        elif args.command == 'uml' and hasattr(args, 'uml_command'):
+            subcommand = args.uml_command
+        elif args.command == 'crossref' and hasattr(args, 'crossref_command'):
+            subcommand = args.crossref_command
+        elif args.command == 'visualize' and hasattr(args, 'visualize_command'):
+            subcommand = args.visualize_command
+        
+        # Check prerequisites if we have a valid subcommand and not skipping deps
+        if subcommand and not args.no_deps:
+            print(f"Checking prerequisites for {args.command} {subcommand}...")
+            if not ensure_prerequisites(args.command, subcommand, args.verbose):
+                print(f"❌ Failed to satisfy prerequisites for {args.command} {subcommand}")
+                return 1
+            print(f"✓ All prerequisites for {args.command} {subcommand} are satisfied")
+        
+        # Dispatch to appropriate handler
         if args.command == 'process':
             dispatch_process_command(args)
         elif args.command == 'uml':
@@ -505,7 +534,42 @@ def dispatch_visualize_command(args):
         visualize_ontology_main()
     elif args.visualize_command == 'connected':
         import scripts.visualize_connected_classes
-        scripts.visualize_connected_classes.main()
+        # Create a new argument parser and namespace for the script
+        parser = argparse.ArgumentParser()
+        parser.add_argument("--input", default=args.input if hasattr(args, 'input') else "outputs/visualization_graph.json")
+        parser.add_argument("--output", default=args.output if hasattr(args, 'output') else "outputs/connected_classes_visualization.html")
+        parser.add_argument("--limit", type=int, default=args.limit if hasattr(args, 'limit') else 75)
+        parser.add_argument("--domain", default=args.domain if hasattr(args, 'domain') else None)
+        script_args = parser.parse_args([])  # Create empty namespace
+        
+        # Set the attributes from our CLI args
+        if hasattr(args, 'input'):
+            script_args.input = args.input
+        if hasattr(args, 'output'):
+            script_args.output = args.output
+        if hasattr(args, 'limit'):
+            script_args.limit = args.limit
+        if hasattr(args, 'domain'):
+            script_args.domain = args.domain
+            
+        # Monkey patch sys.argv to use our args
+        import sys
+        original_argv = sys.argv
+        sys.argv = [sys.argv[0]]  # Keep just the script name
+        
+        # Run the script with our args
+        try:
+            # Pass the args object directly
+            scripts.visualize_connected_classes.visualize_ontology(
+                script_args.input,
+                script_args.output, 
+                script_args.limit, 
+                script_args.domain
+            )
+            print(f"Visualization completed. Open {script_args.output} in a web browser to view.")
+        finally:
+            # Restore original args
+            sys.argv = original_argv
     elif args.visualize_command == 'domain':
         import scripts.visualize_enhanced_domain
         scripts.visualize_enhanced_domain.main()

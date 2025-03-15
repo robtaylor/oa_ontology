@@ -114,6 +114,12 @@ To see all available commands:
 pdm run oa --help
 ```
 
+The CLI automatically checks and runs any prerequisite commands needed. For example, if you run `visualize connected` without having run the necessary data processing steps first, the CLI will run them for you. You can disable this behavior with the `--no-deps` flag:
+
+```bash
+pdm run oa --no-deps <command> <subcommand>  # Skip running prerequisites
+```
+
 #### Main Command Groups
 
 1. **Process Commands**: Process data from OpenAccess documentation
@@ -185,9 +191,14 @@ pdm run oa crossref fix
 **Create Visualizations:**
 ```bash
 # Create various visualizations
-pdm run oa visualize graph
-pdm run oa visualize connected --limit 75
-pdm run oa visualize domain --domain Physical
+pdm run oa visualize graph  # Create simplified visualization graph
+pdm run oa visualize connected --limit 75  # Most connected classes without inheritance
+pdm run oa visualize domain --domain Physical  # Domain-specific visualization
+
+# Visualize specific domains by filtering
+pdm run oa visualize connected --domain Connectivity  # Show Connectivity domain classes
+pdm run oa visualize connected --domain Physical --limit 50  # Top 50 Physical domain classes
+pdm run oa visualize connected --domain Hierarchy  # Show Hierarchy domain classes
 ```
 
 #### Legacy Command Support
