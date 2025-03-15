@@ -2,7 +2,8 @@
 """
 Utilities for visualization of the OpenAccess ontology.
 
-This module configures PyVis to use a library path in the outputs directory.
+This module provides utilities for creating visualizations with PyVis
+using library files stored in the outputs directory.
 """
 
 import os
@@ -19,7 +20,7 @@ def setup_visualization_libraries():
     Configure the visualization environment and copy necessary library files.
     
     Returns:
-        str: The path to the lib directory relative to the output file's location
+        Path: The path to the lib directory
     """
     # Ensure lib directories exist
     os.makedirs(LIB_BINDINGS_DIR, exist_ok=True)
@@ -44,12 +45,11 @@ def setup_visualization_libraries():
                             shutil.copy2(file, dest_file)
                             print(f"Copied {file.name} to {dest_dir}")
     
-    # Return the relative path to the lib directory
-    return "lib"
+    return LIB_DIR
 
 def create_network(height="800px", width="100%", directed=True):
     """
-    Create a pyvis Network with the correct configuration.
+    Create a pyvis Network with the correct configuration to use local library files.
     
     Args:
         height: Height of the visualization (default: "800px")
@@ -59,10 +59,14 @@ def create_network(height="800px", width="100%", directed=True):
     Returns:
         Network: A configured pyvis Network instance
     """
+    # Ensure library files are in place
+    setup_visualization_libraries()
+    
     # Create Network instance
     net = Network(height=height, width=width, directed=directed, notebook=False)
     
     # Use local resources from the outputs/lib directory
+    # This tells pyvis to use local lib files instead of CDN resources
     net.cdn_resources = "local"
     
     # Configure network options
@@ -71,19 +75,7 @@ def create_network(height="800px", width="100%", directed=True):
     
     return net
 
-def apply_patches():
-    """
-    Apply all required patches and setup for visualizations.
-    
-    Returns:
-        str: The relative path to use for library files
-    """
-    # Setup visualization libraries and copy files if needed
-    lib_path = setup_visualization_libraries()
-    
-    return lib_path
-
 if __name__ == "__main__":
     # Quick test to ensure the module works correctly
-    lib_dir = apply_patches()
-    print(f"Visualization libraries configured to use {lib_dir}")
+    setup_visualization_libraries()
+    print(f"Visualization libraries configured in {LIB_DIR}")

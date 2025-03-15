@@ -13,7 +13,7 @@ import json
 import argparse
 import networkx as nx
 import random
-from oa_ontology.visualization_utils import apply_patches, create_network
+from oa_ontology.visualization_utils import create_network
 
 # Define color palettes for domains and relationship types
 DOMAIN_COLORS = {
@@ -142,9 +142,6 @@ def load_ontology_as_networkx(input_file):
 
 def visualize_ontology(input_file, output_file, max_nodes=100, filter_domain=None):
     """Create an interactive network visualization of the domain ontology."""
-    # Apply patches to the visualization libraries to use the correct lib path
-    lib_dir = apply_patches()
-    
     # Load the graph
     G = load_ontology_as_networkx(input_file)
     
@@ -174,10 +171,8 @@ def visualize_ontology(input_file, output_file, max_nodes=100, filter_domain=Non
     G = G.subgraph(top_nodes)
     print(f"Limited to {len(G.nodes)} most connected nodes")
     
-    # Setup the lib directory in outputs
-    apply_patches()
-    
     # Create the pyvis network with proper configuration
+    # This automatically sets up the library files in outputs/lib
     net = create_network(height="800px", width="100%", directed=True)
     
     # Add physics options for a better layout
