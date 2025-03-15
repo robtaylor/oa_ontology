@@ -68,32 +68,31 @@ def main():
     
     # Check if we completed successfully
     if success_count == len(modules):
-        config_file = Path("config.json")
-        if config_file.exists():
-            import json
-            with open(config_file, 'r') as f:
-                config = json.load(f)
-            
-            ontology_dir = config.get("ontology_dir", "ontology_output")
-            print(f"\nResults can be found in the {ontology_dir} directory:")
-            print(f"- Software ontology: {ontology_dir}/design_ontology.json")
-            print(f"- Domain ontology: {ontology_dir}/domain_ontology.json")
-            print(f"- Domain report: {ontology_dir}/domain_ontology_report.md")
-            
-            # Check for enhanced domain ontology
-            enhanced_dir = Path("outputs")
-            if enhanced_dir.exists():
-                enhanced_domain = enhanced_dir / "enhanced_domain_ontology.json"
-                enhanced_report = enhanced_dir / "enhanced_domain_ontology_report.md"
-                if enhanced_domain.exists():
-                    print(f"- Enhanced domain ontology: {enhanced_domain}")
-                if enhanced_report.exists():
-                    print(f"- Enhanced domain report: {enhanced_report}")
-            
-            # Check for visualization report
-            viz_report = Path(ontology_dir) / "visualizations" / "ontology_report.html"
-            if viz_report.exists():
-                print(f"- Visualization report: {viz_report}")
+        # Import configuration for output paths
+        from oa_ontology.config import (
+            ONTOLOGY_DIR, ENHANCED_DIR, 
+            DESIGN_ONTOLOGY_FILE, DOMAIN_ONTOLOGY_FILE, DOMAIN_REPORT_FILE,
+            ENHANCED_DOMAIN_FILE, ENHANCED_DOMAIN_FIXED_FILE
+        )
+        
+        print(f"\nResults can be found in the {ONTOLOGY_DIR} directory:")
+        print(f"- Software ontology: {DESIGN_ONTOLOGY_FILE}")
+        print(f"- Domain ontology: {DOMAIN_ONTOLOGY_FILE}")
+        print(f"- Domain report: {DOMAIN_REPORT_FILE}")
+        
+        # Check for enhanced domain ontology
+        if ENHANCED_DIR.exists():
+            enhanced_domain = ENHANCED_DOMAIN_FILE
+            enhanced_report = ENHANCED_DIR / "enhanced_domain_ontology_report.md"
+            if enhanced_domain.exists():
+                print(f"- Enhanced domain ontology: {enhanced_domain}")
+            if enhanced_report.exists():
+                print(f"- Enhanced domain report: {enhanced_report}")
+        
+        # Check for visualization report
+        viz_report = ONTOLOGY_DIR / "visualizations" / "ontology_report.html"
+        if viz_report.exists():
+            print(f"- Visualization report: {viz_report}")
 
 if __name__ == "__main__":
     main()

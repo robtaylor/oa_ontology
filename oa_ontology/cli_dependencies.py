@@ -10,7 +10,7 @@ import os
 import subprocess
 import sys
 from pathlib import Path
-import json
+from oa_ontology.config import create_directories, REQUIRED_DIRECTORIES
 
 # Define the command dependencies
 # Format: {(command, subcommand): [(prerequisite_command, prerequisite_subcommand), ...]}
@@ -185,30 +185,8 @@ def ensure_prerequisites(command, subcommand, verbose=False, visit_history=None)
 
 def check_directories():
     """Ensure all required directories exist."""
-    directories = [
-        'yaml_output',
-        'yaml_output/schema',
-        'yaml_output/ontology',
-        'ontology_output',
-        'ontology_output/crossref',
-        'outputs',
-        'ontology_output/visualizations'
-    ]
-    
-    for directory in directories:
-        os.makedirs(directory, exist_ok=True)
-    
-    # Also ensure config.json exists
-    if not os.path.exists('config.json'):
-        config = {
-            "yaml_dir": "yaml_output",
-            "output_dir": "ontology_output",
-            "ontology_dir": "ontology_output",
-            "uml_dir": "yaml_output/schema",
-            "debug": False
-        }
-        with open('config.json', 'w') as f:
-            json.dump(config, f, indent=2)
+    # Use the create_directories function from the config module
+    create_directories()
 
 if __name__ == "__main__":
     # Simple self-test
